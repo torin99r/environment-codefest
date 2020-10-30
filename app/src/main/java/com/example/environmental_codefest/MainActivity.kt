@@ -2,6 +2,7 @@ package com.example.environmental_codefest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.*
 import android.view.Menu
 import com.example.environmental_codefest.ui.main.IssueDetailFragment
 import com.example.environmental_codefest.ui.main.IssuesFragment
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity() {
             putInt("KEY", position)
         }
         fragment.arguments = args
+        fragment.enterTransition = Fade()
+        fragment.exitTransition = Fade()
         supportFragmentManager.beginTransaction()
             .addToBackStack(IssueDetailFragment.TAG)
             .replace(R.id.container, fragment, IssueDetailFragment.TAG)
