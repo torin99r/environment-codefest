@@ -3,15 +3,21 @@ package com.example.environmental_codefest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.*
+import android.util.Log
 import android.view.Menu
+import com.example.environmental_codefest.services.IssueService
 import com.example.environmental_codefest.ui.main.IssueDetailFragment
 import com.example.environmental_codefest.ui.main.IssuesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private var issueService : IssueService? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        issueService = IssueService(this, "127.0.0.1:5000");
+        issueService?.getIssues();
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
