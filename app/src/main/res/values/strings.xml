@@ -2,4 +2,9 @@
     <string name="app_name">environmental-codefest</string>
     <string name="main_menu_settings">Settings</string>
     <string name="add_issue">Add Issue</string>
+    <string name="create_issue">Create Issue</string>
+    <string name="add_title">Add Title</string>
+    <string name="add_preview_message">Add Preview Message</string>
+    <string name="add_email_template">Add Email Template</string>
+    <string name="add_sources">Add Sources</string>
 </resources>

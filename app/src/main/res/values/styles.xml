@@ -26,4 +26,10 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <style name="IssueCreationHeader" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/offWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
 </resources>

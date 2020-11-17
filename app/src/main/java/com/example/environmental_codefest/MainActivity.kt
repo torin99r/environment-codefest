@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.*
 import android.view.Menu
+import com.example.environmental_codefest.ui.main.IssueCreateFragment
 import com.example.environmental_codefest.ui.main.IssueDetailFragment
 import com.example.environmental_codefest.ui.main.IssuesFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +34,19 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .addToBackStack(IssueDetailFragment.TAG)
             .replace(R.id.container, fragment, IssueDetailFragment.TAG)
+            .commit()
+    }
+
+    fun navigateToIssueCreate() {
+        val fragment = IssueCreateFragment()
+        fragment.apply {
+            enterTransition = Fade()
+            exitTransition = Fade()
+        }
+
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(IssueCreateFragment.TAG)
+            .replace(R.id.container, fragment, IssueCreateFragment.TAG)
             .commit()
     }
 

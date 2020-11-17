@@ -25,6 +25,7 @@ class IssuesFragment : Fragment() {
 
     private val viewModel: IssuesViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
+    private lateinit var fab: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +43,8 @@ class IssuesFragment : Fragment() {
             )
         }
         recyclerView.addItemDecoration(itemDecoration)
+
+        fab = view.findViewById<View>(R.id.fab)
         return view
     }
 
@@ -53,6 +56,10 @@ class IssuesFragment : Fragment() {
             recyclerView.adapter = IssuesAdapter(issues, IssuesAdapter.OnClickListener { position ->
                 (requireActivity() as MainActivity).navigateToIssueDetail(position)
             })
+        }
+
+        fab.setOnClickListener {
+            (requireActivity() as MainActivity).navigateToIssueCreate()
         }
     }
 
