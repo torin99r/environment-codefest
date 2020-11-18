@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:src="@drawable/ic_add"
-        android:contentDescription="@string/add_issue"
+        android:contentDescription="@string/create_issue"
         android:scaleType="center"
         app:maxImageSize="48dp"
         android:elevation="6dp"

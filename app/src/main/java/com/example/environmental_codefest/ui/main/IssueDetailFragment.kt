@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.environmental_codefest.MainActivity
 import com.example.environmental_codefest.R
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,6 +23,9 @@ class IssueDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (requireActivity() as MainActivity).supportActionBar?.title =
+            resources.getString(R.string.issue_details)
+
         return inflater.inflate(R.layout.issue_detail_fragment, container, false)
     }
 

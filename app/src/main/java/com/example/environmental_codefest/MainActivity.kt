@@ -1,9 +1,10 @@
 package com.example.environmental_codefest
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.*
-import android.view.Menu
+import android.transition.Fade
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.example.environmental_codefest.ui.main.IssueCreateFragment
 import com.example.environmental_codefest.ui.main.IssueDetailFragment
 import com.example.environmental_codefest.ui.main.IssuesFragment
@@ -20,9 +21,24 @@ class MainActivity : AppCompatActivity() {
                     .replace(R.id.container, IssuesFragment.newInstance())
                     .commitNow()
         }
+
+        // found on stack overflow really quick idk whats the best way of doing this
+        // but this works for now
+        supportFragmentManager.addOnBackStackChangedListener {
+            val stackHeight = supportFragmentManager.backStackEntryCount
+            if (stackHeight > 0) {
+                // if we have something on the stack (doesn't include the current shown fragment)
+                supportActionBar!!.setHomeButtonEnabled(true)
+                supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            } else {
+                supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+                supportActionBar!!.setHomeButtonEnabled(false)
+            }
+        }
     }
 
-    // feel like this is more beginner friendly way of fragment navigation even if it's not the best
+    // feel like this is a really easy and quick way rather than trying to set up nav graph for this
+    // project
     fun navigateToIssueDetail(position: Int) {
         val fragment = IssueDetailFragment()
         val args = Bundle().apply {
@@ -50,11 +66,11 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    // todo set up menu ?
-    /* override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    } */
-
-    // todo add bottom nav
+    // not sure if this will interfere with other overrides of this function in fragments
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> supportFragmentManager.popBackStack()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

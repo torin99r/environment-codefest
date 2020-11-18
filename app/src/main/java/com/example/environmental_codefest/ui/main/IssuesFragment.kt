@@ -1,17 +1,14 @@
 package com.example.environmental_codefest.ui.main
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.environmental_codefest.IssuesAdapter
 import com.example.environmental_codefest.MainActivity
 import com.example.environmental_codefest.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,13 +41,16 @@ class IssuesFragment : Fragment() {
         }
         recyclerView.addItemDecoration(itemDecoration)
 
+        (requireActivity() as MainActivity).supportActionBar?.title =
+            resources.getString(R.string.app_name)
+
         fab = view.findViewById<View>(R.id.fab)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.issues.observe(viewLifecycleOwner) {issues ->
+        viewModel.issues.observe(viewLifecycleOwner) { issues ->
             // todo handle empty list state
             recyclerView.layoutManager = LinearLayoutManager(view.context)
             recyclerView.adapter = IssuesAdapter(issues, IssuesAdapter.OnClickListener { position ->

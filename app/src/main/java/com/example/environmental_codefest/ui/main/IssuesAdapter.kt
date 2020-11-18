@@ -1,10 +1,11 @@
-package com.example.environmental_codefest
+package com.example.environmental_codefest.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.example.environmental_codefest.R
 import com.example.environmental_codefest.models.Issue
 
 class IssuesAdapter(private val issues: List<Issue>, private val onClickListener: OnClickListener) :
@@ -23,7 +24,9 @@ class IssuesAdapter(private val issues: List<Issue>, private val onClickListener
             parent,
             false
         )
-        return  IssueViewHolder(layout = layout as ConstraintLayout)
+        return IssueViewHolder(
+            layout = layout as ConstraintLayout
+        )
     }
 
     override fun onBindViewHolder(holder: IssueViewHolder, position: Int) {
