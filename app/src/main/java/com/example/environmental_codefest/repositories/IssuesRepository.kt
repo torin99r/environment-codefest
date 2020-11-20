@@ -4,19 +4,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.environmental_codefest.models.Issue
-import com.example.environmental_codefest.service.WebService
+import com.example.environmental_codefest.service.WebServiceObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class IssuesRepository @Inject constructor(
-    private val webService: WebService
-) {
-    private lateinit var issues: List<Issue>
+class IssuesRepository @Inject constructor() {
+    private var data = MutableLiveData<List<Issue>>()
 
     //TODO inject webservice, use webservice to get issues, cache/preserve data
     fun getIssues(): LiveData<List<Issue>> {
+        // this is for testing ui without a connection
        /* val list = mutableListOf<Issue>()
         for (x in 0 until 20) {
             if (x.rem(2) == 0) {
@@ -31,15 +30,17 @@ class IssuesRepository @Inject constructor(
             }
         }
         issues = list */
-        val data = MutableLiveData<List<Issue>>()
-        webService.getIssues().enqueue(object : Callback<List<Issue>> {
+
+        WebServiceObject.issueData.getIssues().enqueue(object : Callback<List<Issue>> {
             override fun onResponse(call: Call<List<Issue>>, response: Response<List<Issue>>) {
                 data.value = response.body()
+                Log.d(this.toString(), "Response Received")
             }
 
-            // Error case is left out for brevity.
             override fun onFailure(call: Call<List<Issue>>, t: Throwable) {
-                TODO()
+                Log.d(this.toString(), "Error Message: ${t.message}")
+                Log.d(this.toString(), "Call Executed: ${call.isExecuted}")
+                Log.d(this.toString(), "Error Cause: ${t.cause}")
             }
         })
 
@@ -48,6 +49,8 @@ class IssuesRepository @Inject constructor(
     }
 
     fun getIssue(position: Int): Issue {
-        return issues[position]
+        // this isn't right btw need to fix this somehow but leaving it for now cuz i don't feel
+        // like working anymore tonight
+        return data.value!![position]
     }
 }
