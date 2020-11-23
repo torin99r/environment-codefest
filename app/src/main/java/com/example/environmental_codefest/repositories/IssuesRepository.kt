@@ -3,6 +3,7 @@ package com.example.environmental_codefest.repositories
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.environmental_codefest.MainActivity.Companion.db
 import com.example.environmental_codefest.models.Issue
 import com.example.environmental_codefest.service.WebServiceObject
 import retrofit2.Call
@@ -31,10 +32,10 @@ class IssuesRepository @Inject constructor() {
         }
         issues = list */
 
-        WebServiceObject.issueData.getIssues().enqueue(object : Callback<List<Issue>> {
+        /* WebServiceObject.issueData.getIssues().enqueue(object : Callback<List<Issue>> {
             override fun onResponse(call: Call<List<Issue>>, response: Response<List<Issue>>) {
                 data.value = response.body()
-                Log.d(this.toString(), "Response Received")
+                Log.d(this.toString(), "Response Received: ${response.body()}")
             }
 
             override fun onFailure(call: Call<List<Issue>>, t: Throwable) {
@@ -42,7 +43,8 @@ class IssuesRepository @Inject constructor() {
                 Log.d(this.toString(), "Call Executed: ${call.isExecuted}")
                 Log.d(this.toString(), "Error Cause: ${t.cause}")
             }
-        })
+        })*/
+        data.value = db.issueDao().getAll()
 
         Log.d(this.toString(), "Issues Size: ${data.value?.size}")
         return data
@@ -52,5 +54,9 @@ class IssuesRepository @Inject constructor() {
         // this isn't right btw need to fix this somehow but leaving it for now cuz i don't feel
         // like working anymore tonight
         return data.value!![position]
+    }
+
+    fun save(issue: Issue) {
+        db.issueDao().save(issue)
     }
 }

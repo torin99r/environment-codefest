@@ -53,8 +53,8 @@ class IssuesFragment : Fragment() {
         viewModel.issues.observe(viewLifecycleOwner) { issues ->
             // todo handle empty list state
             recyclerView.layoutManager = LinearLayoutManager(view.context)
-            recyclerView.adapter = IssuesAdapter(issues, IssuesAdapter.OnClickListener { position ->
-                (requireActivity() as MainActivity).navigateToIssueDetail(position)
+            recyclerView.adapter = IssuesAdapter(issues, IssuesAdapter.OnClickListener { id ->
+                (requireActivity() as MainActivity).navigateToIssueDetail(id)
             })
         }
 

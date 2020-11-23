@@ -22,7 +22,7 @@ interface WebService {
 // calls like WebServiceObject.issueData.getIssues()
 object WebServiceObject {
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://127.0.0.1:5000")
+        .baseUrl("http://earthspeaks.pythonanywhere.com")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

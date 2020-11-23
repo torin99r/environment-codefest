@@ -33,13 +33,13 @@ class IssuesAdapter(private val issues: List<Issue>, private val onClickListener
         holder.title.text = issues[position].title
         holder.preview.text = issues[position].preview
         holder.itemView.setOnClickListener {
-            onClickListener.onClick(position)
+            onClickListener.onClick(issues[position].id)
         }
     }
 
     override fun getItemCount() = issues.size
 
-    class OnClickListener(val clickListener: (position: Int) -> Unit) {
-        fun onClick(position: Int) = clickListener(position)
+    class OnClickListener(val clickListener: (id: Int) -> Unit) {
+        fun onClick(id: Int) = clickListener(id)
     }
 }

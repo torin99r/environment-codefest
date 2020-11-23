@@ -19,4 +19,8 @@ class IssuesViewModel @ViewModelInject constructor(
     // IssueDetails with more info we pull down from api?
     // rep info if detailfragment is also where we send emails from
     fun getIssue(position: Int) = issuesRepository.getIssue(position)
+    fun saveIssue(issue: Issue) {
+
+    }
+
 }
