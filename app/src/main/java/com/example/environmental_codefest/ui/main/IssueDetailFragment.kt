@@ -25,6 +25,8 @@ class IssueDetailFragment : Fragment() {
     ): View {
         (requireActivity() as MainActivity).supportActionBar?.title =
             resources.getString(R.string.issue_details)
+        (requireActivity() as MainActivity).supportActionBar?.preview =
+            resources.getString(R.string.issue_details)
 
         return inflater.inflate(R.layout.issue_detail_fragment, container, false)
     }
@@ -32,6 +34,8 @@ class IssueDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<TextView>(R.id.title).text =
+            viewModel.getIssue(this.requireArguments()["KEY"] as Int).title
+        view.findViewById<TextView>(R.id.preview).text =
             viewModel.getIssue(this.requireArguments()["KEY"] as Int).title
     }
 }
