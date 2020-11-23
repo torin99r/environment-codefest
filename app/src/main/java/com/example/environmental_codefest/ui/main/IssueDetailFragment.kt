@@ -33,5 +33,11 @@ class IssueDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<TextView>(R.id.title).text =
             viewModel.getIssue(this.requireArguments()["KEY"] as Int).title
+        view.findViewById<TextView>(R.id.preview).text =
+            viewModel.getIssue(this.requireArguments()["KEY"] as Int).preview
+        view.findViewById<TextView>(R.id.message).text =
+            viewModel.getIssue(this.requireArguments()["KEY"] as Int).message
+        view.findViewById<TextView>(R.id.sources).text =
+            viewModel.getIssue(this.requireArguments()["KEY"] as Int).sources
     }
 }
