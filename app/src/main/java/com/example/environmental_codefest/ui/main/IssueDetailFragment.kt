@@ -25,8 +25,6 @@ class IssueDetailFragment : Fragment() {
     ): View {
         (requireActivity() as MainActivity).supportActionBar?.title =
             resources.getString(R.string.issue_details)
-        (requireActivity() as MainActivity).supportActionBar?.preview =
-            resources.getString(R.string.issue_details)
 
         return inflater.inflate(R.layout.issue_detail_fragment, container, false)
     }
@@ -36,6 +34,10 @@ class IssueDetailFragment : Fragment() {
         view.findViewById<TextView>(R.id.title).text =
             viewModel.getIssue(this.requireArguments()["KEY"] as Int).title
         view.findViewById<TextView>(R.id.preview).text =
-            viewModel.getIssue(this.requireArguments()["KEY"] as Int).title
+            viewModel.getIssue(this.requireArguments()["KEY"] as Int).preview
+        view.findViewById<TextView>(R.id.message).text =
+            viewModel.getIssue(this.requireArguments()["KEY"] as Int).message
+        view.findViewById<TextView>(R.id.sources).text =
+            viewModel.getIssue(this.requireArguments()["KEY"] as Int).sources
     }
 }
